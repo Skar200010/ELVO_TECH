@@ -127,7 +127,8 @@ export function Services() {
     fetch("/api/services")
       .then((res) => res.json())
       .then((data) => {
-        setServices(Array.isArray(data) && data.length > 0 ? data : []);
+        const list = Array.isArray(data) ? data : [];
+        setServices(list.length > 0 ? list : []);
         setLoading(false);
       })
       .catch(() => setLoading(false));

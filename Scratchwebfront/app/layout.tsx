@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import { ScrollProgress } from "@/components/landing/scroll-progress"
+import { WhatsAppButton } from "@/components/landing/whatsapp-button"
 
 export const metadata: Metadata = {
   title: 'ELVO Technologies | Build • Innovate • Grow',
@@ -34,7 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-background">
       <body className="font-sans antialiased">
+        <ScrollProgress />
         {children}
+        <WhatsAppButton />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

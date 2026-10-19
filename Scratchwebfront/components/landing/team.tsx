@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Twitter, Linkedin, Globe } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "./motion-wrapper";
+import { AvatarWithFallback } from "./avatar-with-fallback";
 
 const defaultGradients = [
   "from-violet-500 to-purple-500",
@@ -30,6 +31,21 @@ const socialIcons: Record<string, typeof Github> = {
   website: Globe,
 };
 
+const defaultTeam: TeamMemberData[] = [
+  {
+    id: "sohan-khedekar",
+    name: "Sohan Khedekar",
+    role: "Lead Developer and Founder",
+    bio: "Leads development and product direction, turning ideas into practical digital solutions.",
+  },
+  {
+    id: "omkar-mohite",
+    name: "Omkar Mohite",
+    role: "Lead Developer and Founder",
+    bio: "Co-leads development and engineering, building reliable and scalable applications.",
+  },
+];
+
 export function Team() {
   const [team, setTeam] = useState<TeamMemberData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -38,13 +54,17 @@ export function Team() {
     fetch("/api/team")
       .then((res) => res.json())
       .then((data) => {
-        setTeam(data);
+        const list = Array.isArray(data) ? data : [];
+        setTeam(list.length > 0 ? list : defaultTeam);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch(() => {
+        setTeam(defaultTeam);
+        setLoading(false);
+      });
   }, []);
 
-  const displayTeam = team.length > 0 ? team : [];
+  const displayTeam = team.length > 0 ? team : defaultTeam;
 
   return (
     <section id="team" className="relative py-24 md:py-32 overflow-hidden">
@@ -111,25 +131,22 @@ export function Team() {
                       </div>
 
                       <div className="relative z-10">
-                        {member.avatar_url ? (
-                          <motion.img
+                        <motion.div
+                          className={`w-24 h-24 rounded-full bg-gradient-to-br ${gradient} mx-auto mb-6 flex items-center justify-center overflow-hidden border-2 border-primary/20`}
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ type: "spring", stiffness: 300 }}
+                        >
+                          <AvatarWithFallback
                             src={member.avatar_url}
                             alt={member.name}
-                            className="w-24 h-24 rounded-full mx-auto mb-6 object-cover border-2 border-primary/20"
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ type: "spring", stiffness: 300 }}
+                            className="w-full h-full rounded-full object-cover"
+                            fallback={
+                              <span className="text-3xl font-bold text-white">
+                                {(member.name || "?").charAt(0)}
+                              </span>
+                            }
                           />
-                        ) : (
-                          <motion.div
-                            className={`w-24 h-24 rounded-full bg-gradient-to-br ${gradient} mx-auto mb-6 flex items-center justify-center`}
-                            whileHover={{ scale: 1.05 }}
-                            transition={{ type: "spring", stiffness: 300 }}
-                          >
-                            <span className="text-3xl font-bold text-white">
-                              {member.name.charAt(0)}
-                            </span>
-                          </motion.div>
-                        )}
+                        </motion.div>
 
                         <h3 className="text-xl font-serif font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
                           {member.name}

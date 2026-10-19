@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { AnimatedButton } from "./animated-button";
+import { BrandLogo } from "./brand-logo";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -47,12 +48,7 @@ export function Header() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/elvo-logo.png"
-              alt="ELVO Technologies"
-              className="h-20 w-auto object-contain"
-            />
+            <BrandLogo className="h-20 w-auto object-contain" />
           </motion.a>
 
           {/* Desktop Navigation */}

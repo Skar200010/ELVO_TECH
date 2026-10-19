@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play, CheckCircle2, Zap } from "lucide-react";
 import { AnimatedButton, GlowButton } from "./animated-button";
-import { FadeIn, Floating } from "./motion-wrapper";
+import { FadeIn, Floating, BlurIn, ZoomIn } from "./motion-wrapper";
 
 const stats = [
   { value: "500+", label: "Projects Delivered" },
