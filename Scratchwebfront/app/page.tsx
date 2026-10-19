@@ -1,5 +1,6 @@
 import { Header } from "@/components/landing/header"
 import { Hero } from "@/components/landing/hero"
+import { LogoCloud } from "@/components/landing/logo-cloud"
 import { Services } from "@/components/landing/services"
 import { Technologies } from "@/components/landing/technologies"
 import { HowItWorks } from "@/components/landing/how-it-works"
@@ -17,6 +18,7 @@ export default function Home() {
       <AnimatedBackground />
       <Header />
       <Hero />
+      <LogoCloud />
       <Services />
       <Technologies />
       <HowItWorks />

@@ -2,6 +2,7 @@ import { Header } from "@/components/landing/header"
 import { Footer } from "@/components/landing/footer"
 import { AnimatedBackground } from "@/components/landing/animated-background"
 import { FadeIn } from "@/components/landing/motion-wrapper"
+import { BrandLogo } from "@/components/landing/brand-logo"
 import { AnimatedButton } from "@/components/landing/animated-button"
 import {
   Target,
@@ -92,11 +93,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 relative z-10">
           <FadeIn>
             <div className="text-center max-w-3xl mx-auto">
-              <img
-                src="/elvo-logo.png"
-                alt="ELVO Technologies"
-                className="h-32 w-auto object-contain mx-auto mb-6"
-              />
+              <BrandLogo className="h-32 w-auto object-contain mx-auto mb-6" />
               <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
                 About ELVO Technologies
               </span>

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Github, Twitter, Linkedin, Instagram, Loader2, CheckCircle, AlertCircle, Send } from "lucide-react";
 import { FadeIn } from "./motion-wrapper";
 import { Button } from "@/components/ui/button";
+import { BrandLogo } from "./brand-logo";
 import { Input } from "@/components/ui/input";
 
 const footerLinks = {
@@ -130,12 +131,7 @@ export function Footer() {
               className="inline-flex mb-6 bg-white rounded-xl px-3 py-2 shadow-lg"
               whileHover={{ scale: 1.02 }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/elvo-logo.png"
-                alt="ELVO Technologies"
-                className="h-20 w-auto object-contain"
-              />
+              <BrandLogo className="h-20 w-auto object-contain" />
             </motion.a>
 
             <p className="text-background/60 leading-relaxed max-w-sm mb-8">

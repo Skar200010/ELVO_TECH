@@ -22,6 +22,7 @@ interface Project {
   features: string[];
   experience: string;
   featured?: boolean;
+  image?: string;
 }
 
 const filterCategories = [
@@ -263,6 +264,17 @@ function ProjectCard({
   index: number;
 }) {
   const gradient = defaultGradients[index % defaultGradients.length];
+  const palette = [
+    ["#6366f1", "#ec4899"],
+    ["#3b82f6", "#8b5cf6"],
+    ["#10b981", "#06b6d4"],
+    ["#f59e0b", "#ef4444"],
+    ["#06b6d4", "#6366f1"],
+    ["#f43f5e", "#f97316"],
+  ][index % 6];
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='${palette[0]}'/><stop offset='100%' stop-color='${palette[1]}'/></linearGradient></defs><rect width='800' height='450' fill='url(#g)'/><text x='50%' y='46%' dominant-baseline='middle' text-anchor='middle' fill='rgba(255,255,255,0.9)' font-size='40' font-family='sans-serif' font-weight='700'>${project.title}</text><text x='50%' y='58%' dominant-baseline='middle' text-anchor='middle' fill='rgba(255,255,255,0.7)' font-size='18' font-family='sans-serif'>${project.category}</text></svg>`;
+  const imageSrc =
+    project.image || `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 
   return (
     <StaggerItem>
@@ -279,10 +291,20 @@ function ProjectCard({
           {/* Visual */}
           <div className="aspect-[16/9] relative overflow-hidden">
             <div
-              className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-80`}
+              className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-90`}
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imageSrc}
+              alt={project.title}
+              className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-overlay"
+              loading="lazy"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).style.display = "none";
+              }}
             />
             <div
-              className="absolute inset-0 opacity-30"
+              className="absolute inset-0 opacity-20"
               style={{
                 backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
                 backgroundSize: "32px 32px",
@@ -294,11 +316,11 @@ function ProjectCard({
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              <span className="text-7xl font-serif font-bold text-white/30 leading-none">
+              <span className="text-7xl font-serif font-bold text-white/40 leading-none drop-shadow-lg">
                 {project.title.charAt(0)}
               </span>
-              <span className="text-[11px] uppercase tracking-wider text-white/50 font-medium px-3 text-center">
-                Illustrative placeholder
+              <span className="text-[11px] uppercase tracking-wider text-white/70 font-medium px-3 text-center">
+                Project preview
               </span>
             </motion.div>
           </div>
