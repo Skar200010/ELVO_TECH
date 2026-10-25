@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
@@ -20,11 +20,12 @@ const services = [
 ]
 
 const budgetRanges = [
-  "Under $1,000",
-  "$1,000 - $5,000",
-  "$5,000 - $10,000",
-  "$10,000 - $25,000",
-  "$25,000+",
+  "Under ₹10,000",
+  "₹10,000 - ₹30,000",
+  "₹30,000 - ₹60,000",
+  "₹60,000 - ₹1,00,000",
+  "₹1,00,000 - ₹1,50,000",
+  "₹1,50,000+",
 ]
 
 export function ContactForm() {
